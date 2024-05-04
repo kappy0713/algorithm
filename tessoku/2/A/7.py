@@ -1,14 +1,13 @@
-d=int(input())
-n=int(input())
+d = int(input())
+n = int(input())
 
-#d日間の参加者数の増減を計算
-attend=[0]*(d+1)
+check = [0]*(d+2)
 for i in range(n):
-    l,r=map(int,input().split())
-    attend[l-1]+=1
-    attend[r]-=1
+    l,r = map(int, input().split())
+    check[l] += 1
+    check[r+1] -= 1  # 出席者が減るのはr+1日目
 
-#d-1日の参加者数の増減を加算,出力
+ans = [0]*(d+1)
 for i in range(1,d+1):
-    attend[i]+=attend[i-1]
-    print(attend[i-1])
+    ans[i] = ans[i-1] + check[i]
+    print(ans[i])
